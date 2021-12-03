@@ -4,6 +4,7 @@ import { nanoid } from "nanoid";
 import Form from "./components/Forma/Forma";
 import Filter from "./components/Filter/Filter";
 import ContactList from "./components/ContactList/ContactList";
+import { Fragment } from "react";
 // import Vidget from "./Vidget";
 // import TodoList from "./TodoList/TodoList";
 // import initialTodos from "./TodoList/todos.json";
@@ -46,13 +47,13 @@ class App extends Component {
     const { filter } = this.state;
     const visibleContacts = this.getVisibleContacts();
     return (
-      <>
-        <h1>Phonebook</h1>
-        <Form onSubmit={this.formSubmitHandler}> </Form>
-        <h2>Contacts</h2>
+      <section className="wrapper">
+        <h1 className="title">Phonebook</h1>
+        <Form onSubmit={this.formSubmitHandler} />
+        <h2 className="title">Contacts</h2>
         <Filter value={filter} onChange={this.changeFilter} />
         <ContactList contacts={visibleContacts} onChange={this.deleteContact} />
-      </>
+      </section>
     );
   }
 }

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import css from "./Forma.module.css";
 
 class Form extends Component {
   state = {
@@ -7,9 +8,6 @@ class Form extends Component {
   };
   handleInputChange = (e) => {
     const { name, value } = e.currentTarget;
-    // console.log(e.currentTarget);
-    // console.log(e.currentTarget.name);
-    // console.log(e.currentTarget.number);
 
     this.setState({
       // [e.currentTarget.name]: e.currentTarget.number,
@@ -30,8 +28,8 @@ class Form extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
+      <form className={css.form} onSubmit={this.handleSubmit}>
+        <label className={css.label}>
           Name
           <input
             type="text"
@@ -43,7 +41,7 @@ class Form extends Component {
             onChange={this.handleInputChange}
           />
         </label>
-        <label>
+        <label className={css.label}>
           Number
           <input
             type="tel"
@@ -55,7 +53,7 @@ class Form extends Component {
             onChange={this.handleInputChange}
           />
         </label>
-        <button>Add contact</button>
+        <button className={css.btn}>Add contact</button>
       </form>
     );
   }
