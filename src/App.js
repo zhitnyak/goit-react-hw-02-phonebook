@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import { nanoid } from "nanoid";
+import Form from "./components/Forma";
 // import Vidget from "./Vidget";
 // import TodoList from "./TodoList/TodoList";
 // import initialTodos from "./TodoList/todos.json";
@@ -8,50 +9,19 @@ import { nanoid } from "nanoid";
 class App extends Component {
   state = {
     contacts: [],
-    name: "",
-    number: "",
+    filter: "",
   };
-  handleInputChange = (e) => {
-    const { name, number } = e.currentTarget;
-    // console.log(e.currentTarget);
-    // console.log(e.currentTarget.name);
-    // console.log(e.currentTarget.number);
 
-    this.setState({
-      // [e.currentTarget.name]: e.currentTarget.number,
-      [name]: number,
-    });
+  formSubmitHandler = (data) => {
+    console.log(data);
   };
   render() {
     return (
       <>
-        <form>
-          <h1>Phonebook</h1>
-          <label>
-            <input
-              type="text"
-              name="name"
-              value={this.state.name}
-              pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-              title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-              required
-              onChange={this.handleInputChange}
-            />
-          </label>
-          <label>
-            <input
-              type="tel"
-              name="number"
-              value={this.state.number}
-              pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-              title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-              required
-              onChange={this.handleInputChange}
-            />
-          </label>
-
-          <button>Add contact</button>
-        </form>
+        <Form onSubmit={this.formSubmitHandler}> </Form>
+        <h2>Contacts</h2>
+        <label>Find contacts by name</label>
+        <input type="text"></input>
       </>
     );
   }
