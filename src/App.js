@@ -18,10 +18,13 @@ class App extends Component {
   render() {
     return (
       <>
+        <h1>Phonebook</h1>
         <Form onSubmit={this.formSubmitHandler}> </Form>
         <h2>Contacts</h2>
-        <label>Find contacts by name</label>
-        <input type="text"></input>
+        <label>
+          Find contacts by name
+          <input type="text"></input>
+        </label>
       </>
     );
   }
