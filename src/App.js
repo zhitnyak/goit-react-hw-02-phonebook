@@ -33,9 +33,7 @@ class App extends Component {
     );
 
     if (unicName) {
-      alert({
-        text: `${unicName.name} is already in contacts`,
-      });
+      alert(`${unicName.name} is already in contacts`);
     } else {
       const userId = { id: nanoid() };
       this.setState((prevState) => ({
