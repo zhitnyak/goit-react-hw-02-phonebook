@@ -1,6 +1,6 @@
 .wrapper {
   padding: 10px 20px;
-  width: 28%;
+  max-width: 28%;
   background-color: rgb(213, 222, 250);
   margin: auto;
   margin-top: 10px;
