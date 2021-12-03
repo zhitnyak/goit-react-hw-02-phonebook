@@ -4,10 +4,6 @@ import { nanoid } from "nanoid";
 import Form from "./components/Forma/Forma";
 import Filter from "./components/Filter/Filter";
 import ContactList from "./components/ContactList/ContactList";
-import { Fragment } from "react";
-// import Vidget from "./Vidget";
-// import TodoList from "./TodoList/TodoList";
-// import initialTodos from "./TodoList/todos.json";
 
 class App extends Component {
   state = {
@@ -20,20 +16,32 @@ class App extends Component {
     filter: "",
   };
 
-  formSubmitHandler = (data) => {
-    console.log(data);
-  };
-
   changeFilter = (e) => {
     this.setState({ filter: e.currentTarget.value });
   };
 
   getVisibleContacts = () => {
-    const { filter, contacts } = this.state;
-    const normalizedFilter = filter.toLowerCase();
-    return contacts.filter((contact) =>
-      contact.name.toLowerCase(normalizedFilter)
+    const normalizeFilter = this.state.filter.toLowerCase();
+    return this.state.contacts.filter((contact) =>
+      contact.name.toLowerCase().includes(normalizeFilter)
     );
+  };
+
+  addContact = (data) => {
+    let unicName = this.state.contacts.find(
+      (contact) => contact.name === data.name
+    );
+
+    if (unicName) {
+      alert({
+        text: `${unicName.name} is already in contacts`,
+      });
+    } else {
+      const userId = { id: nanoid() };
+      this.setState((prevState) => ({
+        contacts: [...prevState.contacts, { ...userId, ...data }],
+      }));
+    }
   };
 
   deleteContact = (contactId) => {
@@ -44,12 +52,12 @@ class App extends Component {
     }));
   };
   render() {
-    const { filter } = this.state;
     const visibleContacts = this.getVisibleContacts();
+    const { filter } = this.state;
     return (
       <section className="wrapper">
         <h1 className="title">Phonebook</h1>
-        <Form onSubmit={this.formSubmitHandler} />
+        <Form onSubmit={this.addContact} />
         <h2 className="title">Contacts</h2>
         <Filter value={filter} onChange={this.changeFilter} />
         <ContactList contacts={visibleContacts} onChange={this.deleteContact} />
@@ -57,33 +65,5 @@ class App extends Component {
     );
   }
 }
-
-// class App extends Component {
-//   state = {
-//     todos: initialTodos,
-//   };
-
-//   deleteTodo = (todoId) => {
-//     this.setState((prevState) => ({
-//       todos: prevState.todos.filter((todo) => todo.id !== todoId),
-//     }));
-//   };
-//   render() {
-//     const { todos } = this.state;
-//     const completedTodo = todos.reduce(
-//       (acc, todo) => (todo.completed ? acc + 1 : acc),
-//       0
-//     );
-//     return (
-//       <>
-//         <div>
-//           <span>ОБЩЕЕ Кол-во: {todos.length}</span>
-//           <span>Выполнeнных: {completedTodo}</span>
-//         </div>
-//         <TodoList todos={todos} onDeleteTodo={this.deleteTodo} />
-//       </>
-//     );
-//   }
-// }
 
 export default App;

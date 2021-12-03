@@ -5,24 +5,25 @@ import css from "./ContactList.module.css";
 const ContactList = ({ contacts, onChange }) => {
   return (
     <ul className={css.list}>
-      {contacts.map(({ id, name, number }) => (
-        <li className={css.item} key={id}>
-          {`${name}: ${number}`}
-          <button
-            className={css.btn}
-            type="button"
-            onClick={() => onChange(id)}
-          >
-            Delete
-          </button>
-        </li>
-      ))}
+      {contacts.length > 0 &&
+        contacts.map(({ id, name, number }) => (
+          <li className={css.item} key={id}>
+            {`${name}: ${number}`}
+            <button
+              className={css.btn}
+              type="button"
+              onClick={() => onChange(id)}
+            >
+              Delete
+            </button>
+          </li>
+        ))}
     </ul>
   );
 };
 
 ContactList.propTypes = {
-  contacts: PropTypes.object,
+  contacts: PropTypes.array,
   onChange: PropTypes.func,
 };
 export default ContactList;
