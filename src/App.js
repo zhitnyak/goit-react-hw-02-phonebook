@@ -27,26 +27,24 @@ class App extends Component {
     );
   };
 
-  addContact = (data) => {
+  addContact = ({ name, number }) => {
     let unicName = this.state.contacts.find(
-      (contact) => contact.name === data.name
+      (contact) => contact.name.toLowerCase() === name.toLowerCase()
     );
 
     if (unicName) {
       alert(`${unicName.name} is already in contacts`);
     } else {
-      const userId = { id: nanoid() };
+      // const userId = nanoid();
       this.setState((prevState) => ({
-        contacts: [...prevState.contacts, { ...userId, ...data }],
+        contacts: [...prevState.contacts, { id: nanoid(), name, number }],
       }));
     }
   };
 
-  deleteContact = (contactId) => {
+  deleteContact = (id) => {
     this.setState((prevState) => ({
-      contacts: prevState.contacts.filter(
-        (contact) => contact.id !== contactId
-      ),
+      contacts: prevState.contacts.filter((contact) => contact.id !== id),
     }));
   };
   render() {

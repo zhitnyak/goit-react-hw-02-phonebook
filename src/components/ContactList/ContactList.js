@@ -23,7 +23,7 @@ const ContactList = ({ contacts, onChange }) => {
 };
 
 ContactList.propTypes = {
-  contacts: PropTypes.array,
-  onChange: PropTypes.func,
+  contacts: PropTypes.array.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
 export default ContactList;
